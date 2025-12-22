@@ -1,0 +1,13 @@
+    location_id,location_name,address,location_category,latitude,longitude
+    1,Open Space Universitas Lambung Mangkurat,"Jl. Brigjen H. Hasan Basry, Kel. Pangeran, Kec. Banjarmasin Utara",park,-3.2973146,114.5868619
+    2,NORDEN COFFEE,"Jl. Brigjen H. Hasan Basry No. 46, Kel. Pangeran, Kec. Banjarmasin Utara",cafe,-3.2975807,114.5876179
+    3,Indomaret Hasan Basri,"Jl. Brigjen H. Hasan Basry No. 41A, Kel. Pangeran, Kec. Banjarmasin Utara",minimarket,-3.299695,114.589363
+    4,Nordu Coffee Banjarmasin Kayutangi,"Jl. Brigjen H. Hasan Basry No. 11, Kel. Pangeran, Kec. Banjarmasin Utara",cafe,-3.2846989,114.58929
+    5,Mie Gacoan Hasan Basri Banjarmasin,"Jl. Brigjen H. Hasan Basry No. 41, Kel. Pangeran, Kec. Banjarmasin Utara",restaurant,-3.2838725,114.5896879
+    6,Warung Yuliriska,"Jl. HKSN No. 6, Kel. Kuin Utara, Kec. Banjarmasin Utara",restaurant,-3.2851431,114.5824087
+    7,Taman Siring 0 Kilometer Banjarmasin,"Jl. Jenderal Sudirman No. 1, Kel. Gadang, Kec. Banjarmasin Tengah",park,-3.315039,114.592524
+    8,Taman Kamboja,"Jl. H. Anang Adenansi, Kel. Kertak Baru Ilir, Kec. Banjarmasin Tengah",park,-3.3221064,114.5872086
+    9,South Kalimantan Cultural Park,"Jl. Brigjen H. Hasan Basry No. 2, Kel. Sungai Miai, Kec. Banjarmasin Utara",park,-3.2979914,114.5901445
+    10,Gedung Sultan Suriansyah,"Jl. Brigjen H. Hasan Basry, Kel. Sungai Miai, Kec. Banjarmasin Utara",theatre,-3.2989256,114.5904617
+    11,Duta Mall Banjarmasin,"Jl. Ahmad Yani No. 98, Kel. Melayu, Kec. Banjarmasin Tengah",mall,-3.3230203,114.603136
+    12,KCM CINEMA BANJARMASIN,"Jl. Belitung Darat No. 7, Kel. Belitung Utara, Kec. Banjarmasin Barat",theatre,-3.301479,114.5748322
