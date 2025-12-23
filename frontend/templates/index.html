@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Touch Grass Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style> 
+        body { font-family: 'Plus Jakarta Sans', sans-serif; } 
+        #map { height: 400px; border-radius: 1.5rem; }
+    </style>
+</head>
+
+<body class="bg-slate-50 min-h-screen text-slate-900">
+    <div class="max-w-4xl mx-auto px-4 py-12">
+        <header class="mb-10 text-left">
+            <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Touch Grass Dashboard</h1>
+            <p class="text-slate-500 font-medium mt-1">Analisis deskriptif lingkungan dan rekomendasi preskriptif.</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm text-center">
+                <div class="flex justify-center mb-4 text-slate-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
+                </div>
+                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-1">Total Screen Time</p>
+                <h2 id="st-val" class="text-3xl font-extrabold text-slate-900 tracking-tight">--</h2>
+                <div id="st-indicator" class="mt-2 text-xs font-bold text-slate-900 tracking-tight">Memuat...</div>
+            </div>
+            <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm text-center">
+                <div id="weather-icon" class="flex justify-center mb-4 text-amber-500"></div>
+                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-1">Kondisi Luar</p>
+                <h2 id="weather-val" class="text-4xl font-extrabold text-slate-900 tracking-tight">--</h2>
+            </div>
+            <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm text-center">
+                <div class="flex justify-center mb-4 text-rose-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>
+                </div>
+                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-1">Temperatur</p>
+                <h2 id="temp-val" class="text-4xl font-extrabold text-slate-900 tracking-tight">--</h2>
+            </div>
+        </div>
+
+        <div id="recom-section">
+            <div id="recommended-section" class="mb-10 hidden">
+                <h2 class="text-xs font-extrabold uppercase tracking-[0.2em] text-slate-400 mb-6 flex items-center gap-3">
+                    <span class="w-8 h-[1px] bg-slate-200"></span> Rekomendasi Utama
+                </h2>
+                <div id="recommended-list" class="grid gap-6"></div>
+            </div>
+            <div id="alt-section" class="hidden">
+                <h2 class="text-xs font-extrabold uppercase tracking-[0.2em] text-slate-400 mb-6 flex items-center gap-3">
+                    <span class="w-8 h-[1px] bg-slate-200"></span> Bisa Nanti Saja
+                </h2>
+                <div id="wait-list" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+            </div>
+        </div>
+
+        <div id="map-section" class="mt-12 hidden">
+            <h2 class="text-xs font-extrabold uppercase tracking-[0.2em] text-slate-400 mb-6 flex items-center gap-3">
+                <span class="w-8 h-[1px] bg-slate-200"></span> Peta Lokasi Sekitar
+            </h2>
+            <div id="map" class="shadow-sm border border-slate-200 mb-12"></div>
+        </div>
+
+        <div class="mt-12">
+            <h2 class="text-xs font-extrabold uppercase tracking-[0.2em] text-slate-400 mb-6 flex items-center gap-3">
+                <span class="w-8 h-[1px] bg-slate-200"></span> Tren Penggunaan Perangkat
+            </h2>
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                <canvas id="screenTimeChart" style="height: 300px; width: 100%;"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
