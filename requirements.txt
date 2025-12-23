@@ -5,3 +5,4 @@ minio
 requests
 flask
 python-dotenv
+firebase-admin
