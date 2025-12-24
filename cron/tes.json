@@ -1,0 +1,29 @@
+{
+    "generated_at": "2025-12-24T06:00:11.339397+00:00", 
+    "context": {
+        "generated_at": "2025-12-24T06:00:11.339382+00:00", 
+        "screen_time_minutes": 173, 
+        "user_lat": -3.2972972972972974, 
+        "user_lon": 114.58609013253712, 
+        "weather_category": "cloudy", 
+        "temperature_c": 31.0
+        }, 
+        "decision": 
+        {
+            "should_go_out": false, 
+            "reason": "cooldown_active", 
+            "cooldown": true
+        },  "recommendations": [{
+            "location_id": 1, 
+            "location_name": "Open Space Universitas Lambung Mangkurat", 
+            "category": "park", 
+            "address": "Jl. Brigjen H. Hasan Basry, Kel. Pangeran, Kec. Banjarmasin Utara", 
+            "latitude": -3.2973146, 
+            "longitude": 114.5868619, 
+            "distance_km": 0.086, 
+            "priority_score": 5.6, 
+            "google_maps_link": "http://maps.google.com/?q=-3.2973146,114.5868619", 
+            "is_active": true
+            }, 
+            {
+                "location_id": 9, "location_name": "South Kalimantan Cultural Park", "category": "park", "address": "Jl. Brigjen H. Hasan Basry No. 2, Kel. Sungai Miai, Kec. Banjarmasin Utara", "latitude": -3.2979914, "longitude": 114.5901445, "distance_km": 0.457, "priority_score": 4.8, "google_maps_link": "http://maps.google.com/?q=-3.2979914,114.5901445", "is_active": true}, {"location_id": 2, "location_name": "NORDEN COFFEE", "category": "cafe", "address": "Jl. Brigjen H. Hasan Basry No. 46, Kel. Pangeran, Kec. Banjarmasin Utara", "latitude": -3.2975807, "longitude": 114.5876179, "distance_km": 0.173, "priority_score": 4.4, "google_maps_link": "http://maps.google.com/?q=-3.2975807,114.5876179", "is_active": true}, {"location_id": 7, "location_name": "Taman Siring 0 Kilometer Banjarmasin", "category": "park", "address": "Jl. Jenderal Sudirman No. 1, Kel. Gadang, Kec. Banjarmasin Tengah", "latitude": -3.315039, "longitude": 114.592524, "distance_km": 2.098, "priority_score": 3.2, "google_maps_link": "http://maps.google.com/?q=-3.315039,114.592524", "is_active": true}, {"location_id": 8, "location_name": "Taman Kamboja", "category": "park", "address": "Jl. H. Anang Adenansi, Kel. Kertak Baru Ilir, Kec. Banjarmasin Tengah", "latitude": -3.3221064, "longitude": 114.5872086, "distance_km": 2.761, "priority_score": 3.2, "google_maps_link": "http://maps.google.com/?q=-3.3221064,114.5872086", "is_active": true}, {"location_id": 3, "location_name": "Indomaret Hasan Basri", "category": "minimarket", "address": "Jl. Brigjen H. Hasan Basry No. 41A, Kel. Pangeran, Kec. Banjarmasin Utara", "latitude": -3.299695, "longitude": 114.589363, "distance_km": 0.451, "priority_score": 2.8, "google_maps_link": "http://maps.google.com/?q=-3.299695,114.589363", "is_active": true}, {"location_id": 4, "location_name": "Nordu Coffee Banjarmasin Kayutangi", "category": "cafe", "address": "Jl. Brigjen H. Hasan Basry No. 11, Kel. Pangeran, Kec. Banjarmasin Utara", "latitude": -3.2846989, "longitude": 114.58929, "distance_km": 1.445, "priority_score": 2.8, "google_maps_link": "http://maps.google.com/?q=-3.2846989,114.58929", "is_active": true}, {"location_id": 10, "location_name": "Gedung Sultan Suriansyah", "category": "theatre", "address": "Jl. Brigjen H. Hasan Basry, Kel. Sungai Miai, Kec. Banjarmasin Utara", "latitude": -3.2989256, "longitude": 114.5904617, "distance_km": 0.518, "priority_score": 2.8, "google_maps_link": "http://maps.google.com/?q=-3.2989256,114.5904617", "is_active": true}, {"location_id": 6, "location_name": "Warung Yuliriska", "category": "restaurant", "address": "Jl. HKSN No. 6, Kel. Kuin Utara, Kec. Banjarmasin Utara", "latitude": -3.2851431, "longitude": 114.5824087, "distance_km": 1.412, "priority_score": 2.0, "google_maps_link": "http://maps.google.com/?q=-3.2851431,114.5824087", "is_active": true}, {"location_id": 12, "location_name": "KCM CINEMA BANJARMASIN", "category": "theatre", "address": "Jl. Belitung Darat No. 7, Kel. Belitung Utara, Kec. Banjarmasin Barat", "latitude": -3.301479, "longitude": 114.5748322, "distance_km": 1.333, "priority_score": 2.0, "google_maps_link": "http://maps.google.com/?q=-3.301479,114.5748322", "is_active": true}]}

@@ -1,4 +1,4 @@
-import subprocess, sys
+import subprocess, sys 
 
 STEPS = [
     "scripts.extract.firebase_data",
@@ -7,8 +7,8 @@ STEPS = [
     "scripts.transform.split_user_activity",
     "scripts.transform.weather_to_silver",
     "scripts.transform.places_upsert",
-    "analytics.run_duckdb",
-    "scripts.gold.write_gold_json",
+    "scripts.analytics.daily_screen_time",
+    "scripts.gold.build_gold",
 ]
 
 for step in STEPS:
