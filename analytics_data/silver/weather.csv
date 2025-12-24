@@ -1,0 +1,2 @@
+timestamp_utc,temperature_c,uv_index,weather_code,weather_category,horizon_hours
+2025-12-23T19:00:00+00:00,25.9,0.0,95,storm,3

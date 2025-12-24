@@ -2,18 +2,20 @@ from datetime import datetime, timezone
 import os
 import sys
 from dotenv import load_dotenv
+from pathlib import Path
 
 import firebase_admin
 from firebase_admin import credentials, firestore
 
 from scripts.load.write_to_minio import upload_json_to_minio
 
-load_dotenv()
+BASE_DIR = Path(__file__).resolve().parents[2]
+load_dotenv(BASE_DIR / ".env")
 
 FIREBASE_KEY = os.getenv("FIREBASE_SERVICE_ACCOUNT")
 FIREBASE_PROJECT_ID = os.getenv("FIREBASE_PROJECT_ID")
 COLLECTION_NAME = "screen_time_logs"
-
+LIMIT = 5
 
 if not FIREBASE_KEY or not FIREBASE_PROJECT_ID:
     print("[ERROR] Firebase env not set", file=sys.stderr)
@@ -36,7 +38,7 @@ def extract_latest_screen_time():
     query = (
         db.collection(COLLECTION_NAME)
         .order_by("timestamp", direction=firestore.Query.DESCENDING)
-        .limit(5)
+        .limit(LIMIT)
     )
 
     records = []
@@ -56,14 +58,14 @@ def extract_latest_screen_time():
         "source": "firebase.firestore",
         "collection": COLLECTION_NAME,
         "extracted_at": datetime.now(timezone.utc).isoformat(),
-        "strategy": f"latest_{5}_records",
+        "strategy": f"latest_{LIMIT}_records",
         "record_count": len(records),
         "records": records
     }
 
     object_name = (
         "bronze/user_activity/"
-        f"user_activity_latest_5_"
+        f"user_activity_latest_{LIMIT}_"
         f"{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}.json"
     )
 

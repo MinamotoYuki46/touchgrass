@@ -21,7 +21,7 @@ def fetch_weather():
         "latitude": LATITUDE,
         "longitude": LONGITUDE,
         "hourly": "temperature_2m,uv_index,weathercode",
-        "forecast_days": 1,
+        "forecast_hours": 3,
         "timezone": "UTC"
     }
 

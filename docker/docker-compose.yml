@@ -13,4 +13,13 @@ services:
     volumes:
       - /home/minamotoyuki/touchgrass/minio_data:/data
 
-  
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: touchgrass-app
+    working_dir: /app
+    env_file:
+      - ../.env
+    ports:
+      - "5000:5000"

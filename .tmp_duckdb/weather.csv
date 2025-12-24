@@ -1,0 +1,2 @@
+timestamp_utc,temperature_c,uv_index,weather_code,weather_category,horizon_hours
+2025-12-24T00:00:00+00:00,26.2,0.3,3,cloudy,3

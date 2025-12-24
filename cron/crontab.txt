@@ -1,0 +1,1 @@
+*/15 * * * * docker compose -f /home/minamotoyuki/touchgrass/docker/docker-compose.yml exec -T app python -m scripts.run_etl >> /home/minamotoyuki/touchgrass/logs/pipeline.log 2>&1

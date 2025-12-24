@@ -1,0 +1,43 @@
+context:
+  goal: reduce_screen_time
+
+user_activity:
+  active_hours:
+    start: "07:00"
+    end: "22:00"
+
+screen_time:
+  thresholds_minutes:
+    high: 300 
+
+weather:
+  allowed_categories:
+    - clear
+    - cloudy
+
+crowdedness:
+  category_map:
+    park: low
+    outdoor: low
+    sports: medium
+    cafe: high
+    mall: high
+    restaurant: high
+
+distance:
+  min_km: 0.5
+  max_km: 7
+  reset_cooldown_if_move_km: 0.1
+
+cooldown:
+  minutes: 120
+
+recommendation:
+  allowed_crowd_levels:
+    - low
+    - medium
+  preferred_categories:
+    - park
+    - outdoor
+    - sports
+  max_results: 5
