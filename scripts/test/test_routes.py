@@ -1,5 +1,6 @@
 import os
 import requests
+import json
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -11,8 +12,8 @@ if not ORS_API_KEY:
     raise RuntimeError("ORS_API_KEY not found")
 
 # Dummy coordinates
-start_lat, start_lon = -3.4415, 114.8326
-end_lat, end_lon = -3.4429, 114.8353
+start_lat, start_lon = -3.3008856, 114.5908285
+end_lat, end_lon = -3.2979914, 114.5901445
 
 url = "https://api.openrouteservice.org/v2/directions/driving-car"
 headers = {
@@ -32,7 +33,5 @@ response.raise_for_status()
 
 data = response.json()
 
-distance_km = data["routes"][0]["summary"]["distance"] / 1000
-
-print("=== ROUTE DISTANCE TEST ===")
-print(f"Distance : {distance_km:.2f} km")
+# PRINT FULL JSON RESPONSE
+print(json.dumps(data, indent=2))

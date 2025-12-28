@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Tuple
 from dotenv import load_dotenv
 
-BASE_DIR = Path(__file__).resolve().parents[3]
+BASE_DIR = Path(__file__).resolve().parents[2]
 load_dotenv(BASE_DIR / ".env")
 
 ORS_BASE_URL = "https://api.openrouteservice.org"
@@ -40,4 +40,3 @@ def route_distance_km(origin, destination):
         dist_m = sum(seg["distance"] for seg in route["segments"])
 
     return dist_m / 1000.0
-
