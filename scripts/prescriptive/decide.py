@@ -1,33 +1,22 @@
-from typing import List, Dict
-
-RECOMMEND_THRESHOLD = 3.5
+from .rules_loader import load_rules
 
 
-def decide(screen_time_minutes: int, ranked_recommendations: List[Dict], cooldown_active: bool) -> Dict:
-    """Return decision dict
-
-    - should_go_out: True if cooldown not active and top rec >= threshold
-    """
-    decision = {
-        "should_go_out": False,
-        "reason": None,
-        "cooldown": cooldown_active
-    }
+def decide(screen_time_minutes, ranked_candidates, cooldown_active):
+    rules = load_rules()
+    thresholds = rules["screen_time"]["thresholds_minutes"]
 
     if cooldown_active:
-        decision["reason"] = "cooldown_active"
-        return decision
+        return {"should_go_out": False, "reason": "cooldown_active", "cooldown": True}
 
-    if not ranked_recommendations:
-        decision["reason"] = "no_candidates"
-        return decision
+    if screen_time_minutes < thresholds["medium"]:
+        return {"should_go_out": False, "reason": "screen_time_too_low", "cooldown": False}
 
-    top = ranked_recommendations[0]
-    if top.get("priority_score", 0) >= RECOMMEND_THRESHOLD:
-        decision["should_go_out"] = True
-        decision["reason"] = "viable_location"
-    else:
-        decision["should_go_out"] = False
-        decision["reason"] = "no_high_score"
+    if not ranked_candidates:
+        return {"should_go_out": False, "reason": "no_candidates", "cooldown": False}
 
-    return decision
+    return {
+        "should_go_out": True,
+        "reason": "viable_location",
+        "score": ranked_candidates[0]["priority_score"],
+        "cooldown": False
+    }

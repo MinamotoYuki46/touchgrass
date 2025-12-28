@@ -45,12 +45,8 @@ recommendation:
     - sports
   max_results: 5
 
-# =========================
-# SCORING (NEW)
-# =========================
 scoring:
 
-  # bobot total = 1.0
   weights:
     distance: 0.4
     category: 0.3
@@ -58,10 +54,8 @@ scoring:
     weather: 0.1
 
   distance_score:
-    # semakin dekat (tapi > min_km) semakin tinggi
-    # score dinormalisasi 0–1
-    near_km: 1.0        # <= 1 km → score max
-    far_km: 7.0         # >= 7 km → score 0
+    near_km: 1.0
+    far_km: 7.0
 
   category_score:
     park: 1.0
