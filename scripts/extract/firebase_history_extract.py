@@ -1,8 +1,9 @@
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import os
 import sys
 from dotenv import load_dotenv
 from pathlib import Path
+
 import firebase_admin
 from firebase_admin import credentials, firestore
 from scripts.load.write_to_minio import upload_json_to_minio
@@ -13,7 +14,6 @@ load_dotenv(BASE_DIR / ".env")
 FIREBASE_KEY = os.getenv("FIREBASE_SERVICE_ACCOUNT")
 FIREBASE_PROJECT_ID = os.getenv("FIREBASE_PROJECT_ID")
 COLLECTION_NAME = "screen_time_logs"
-LIMIT = 5
 
 if not FIREBASE_KEY or not FIREBASE_PROJECT_ID:
     print("[ERROR] Firebase env not set", file=sys.stderr)
@@ -25,52 +25,47 @@ if not firebase_admin._apps:
 
 db = firestore.client()
 
-
 def normalize_ts(ts):
     if ts is None:
         return None
     return ts.astimezone(timezone.utc).isoformat()
 
+def extract_history_7_days():
+    print("[INFO] Starting 7-day history extraction...")
+    now = datetime.now(timezone.utc)
+    seven_days_ago = now - timedelta(days=7)
 
-def extract_latest_screen_time():
-    query = (
-        db.collection(COLLECTION_NAME)
-        .order_by("timestamp", direction=firestore.Query.DESCENDING)
-        .limit(LIMIT)
-    )
+
+    docs = db.collection(COLLECTION_NAME) \
+             .where("timestamp", ">=", seven_days_ago) \
+             .order_by("timestamp", direction=firestore.Query.DESCENDING) \
+             .stream()
 
     records = []
-    for doc in query.stream():
-        d = doc.to_dict() or {}
-
+    for doc in docs:
+        data = doc.to_dict()
         records.append({
-            "document_id": doc.id,
-            "device": d.get("device"),
-            "latitude": d.get("latitude"),
-            "longitude": d.get("longitude"),
-            "minutes_spent": d.get("minutes_spent"),
-            "timestamp_utc": normalize_ts(d.get("timestamp"))
+            "device": data.get("device"),
+            "minutes_spent": data.get("minutes_spent"),
+            "timestamp_utc": normalize_ts(data.get("timestamp")),
+            "latitude": data.get("latitude"),
+            "longitude": data.get("longitude")
         })
 
     payload = {
-        "source": "firebase.firestore",
+        "source": "firebase.history",
         "collection": COLLECTION_NAME,
         "extracted_at": datetime.now(timezone.utc).isoformat(),
-        "strategy": f"latest_{LIMIT}_records",
-        "record_count": len(records),
+        "strategy": "last_7_days",
+        "total_records": len(records),
         "records": records
     }
 
-    object_name = (
-        "bronze/user_activity/"
-        f"user_activity_latest_{LIMIT}_"
-        f"{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}.json"
-    )
 
+    object_name = f"bronze/screen_time_history/history_{now.strftime('%Y%m%d_%H%M%S')}.json"
     upload_json_to_minio(object_name=object_name, data=payload)
 
-    print(f"[OK] Extracted {len(records)} latest records → {object_name}")
-
+    print(f"[OK] Extracted {len(records)} records to {object_name}")
 
 if __name__ == "__main__":
-    extract_latest_screen_time()
+    extract_history_7_days()

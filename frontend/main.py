@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 from minio import Minio
 
 # optional analytics helper to supply daily history
-from scripts.analytics.daily_screen_time import compute_daily_minutes
+from scripts.analytics.daily_screen_time import compute_daily_trend
 
 
 # ----------------------------
@@ -120,11 +120,11 @@ def api_recommendations():
     latest_name = _safe_latest_object_name(objects)
 
     if not latest_name:
-        return jsonify({"status": "NO_DATA"}), 204
+        return jsonify({"status", "NO DATA"}), 404
 
     gold = _read_json_object(latest_name)
     if not gold:
-        return jsonify({"status": "INVALID_GOLD"}), 204
+        return jsonify({"status": "INVALID_GOLD"}), 500
 
     ctx = gold.get("context", {})
     decision = gold.get("decision", {})
@@ -145,7 +145,7 @@ def api_recommendations():
     }
 
     # -------- history (optional) --------
-    daily_spend_time = compute_daily_minutes(7)
+    daily_spend_time = compute_daily_trend(7)
 
     history = [
         {

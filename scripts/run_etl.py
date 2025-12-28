@@ -2,9 +2,11 @@ import subprocess, sys
 
 STEPS = [
     "scripts.extract.firebase_data",
+    "scripts.extract.firebase_history_extract",
     "scripts.extract.open_meteo_weather",
     "scripts.extract.raw_places_loader",
     "scripts.transform.split_user_activity",
+    "scripts.transform.history_to_silver",
     "scripts.transform.weather_to_silver",
     "scripts.transform.places_upsert",
     "scripts.analytics.daily_screen_time",

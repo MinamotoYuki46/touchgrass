@@ -20,13 +20,10 @@ async function loadData() {
         const hours = Math.floor(st / 60);
         const minutes = st % 60;
         document.getElementById('st-val').innerText = `${hours} Jam ${minutes} Menit`;
-        // ---------------------------------------------------------
-
         document.getElementById('weather-val').innerText = weather.condition;
         document.getElementById('temp-val').innerText = weather.temperature;
         document.getElementById('weather-icon').innerHTML = getWeatherIcon(weather.condition);
         
-        // Update grafik histori
         updateChart(data.screen_time_history);
 
         const stIndicator = document.getElementById('st-indicator'); 
@@ -79,32 +76,68 @@ async function loadData() {
 
 function updateChart(history) {
     const ctx = document.getElementById('screenTimeChart').getContext('2d');
-    const labels = history.map(h => h.time);
-    const values = history.map(h => h.value);
+    const labels = history.map(h => {
+        const [year, month, day] = h.time.split('-');
+        return `${day}-${month}-${year}`;
+    });
+    const values = history.map(h => (h.value / 60).toFixed(1));
 
     if (!stChart) {
         stChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'Menit',
+                    label: 'Durasi (Jam)',
                     data: values,
-                    borderColor: '#0f172a',
-                    backgroundColor: 'rgba(15, 23, 42, 0.05)',
-                    borderWidth: 4,
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 0
+                    backgroundColor: '#0f172a',
+                    borderRadius: 10,
+                    borderSkipped: false,
+                    barPercentage: 0.6,
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
+                plugins: { 
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + ' jam';
+                            }
+                        },
+                        backgroundColor: '#1e293b',
+                        padding: 12,
+                        cornerRadius: 8,
+                        displayColors: false
+                    }
+                },
                 scales: {
-                    y: { beginAtZero: true, grid: { display: false }, ticks: { font: { weight: 'bold' } } },
-                    x: { grid: { display: false }, ticks: { font: { weight: 'bold' } } }
+                    y: { 
+                        beginAtZero: true, 
+                        title: {
+                            display: true,
+                            text: 'Jam',
+                            font: { weight: 'bold' }
+                        },
+                        grid: { 
+                            display: true,
+                            color: '#f1f5f9',
+                            drawBorder: false
+                        }, 
+                        ticks: { 
+                            font: { weight: '600', size: 11 },
+                            color: '#64748b'
+                        } 
+                    },
+                    x: { 
+                        grid: { display: false }, 
+                        ticks: { 
+                            font: { weight: '600', size: 11 },
+                            color: '#64748b'
+                        } 
+                    }
                 }
             }
         });
@@ -146,7 +179,7 @@ function updateMap(recs, userLoc) {
     markers.forEach(m => map.removeLayer(m)); markers = [];
     L.circleMarker([userLoc.lat, userLoc.lng], { color: '#3b82f6', radius: 8 }).addTo(map).bindPopup('<b>Lokasi Anda</b>');
     recs.forEach(r => {
-        const popup = `<div class="p-1"><b>${r.place_name}</b><br><a href="http://googleusercontent.com/maps.google.com/5{r.latitude},${r.longitude}" target="_blank" class="text-blue-600 font-bold text-xs">Gmaps →</a></div>`;
+        const popup = `<div class="p-1"><b>${r.place_name}</b><br><a href="https://www.google.com/maps/search/?api=1&query=${r.latitude},${r.longitude}" target="_blank" class="text-blue-600 font-bold text-xs">Open with Google Maps</a></div>`;
         const m = L.marker([r.latitude, r.longitude]).addTo(map).bindPopup(popup); markers.push(m);
     });
 }
