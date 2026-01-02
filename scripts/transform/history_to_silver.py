@@ -69,7 +69,7 @@ def process_history_to_silver():
         raise RuntimeError("No records in bronze payload")
     
     df = pd.DataFrame(records)
-    df["timestamp_utc"] = pd.to_datetime(df["timestamp_utc"])
+    df["timestamp_utc"] = pd.to_datetime(df["timestamp_utc"], format='ISO8601')
     df["timestamp_local"] = df["timestamp_utc"] + LOCAL_TZ_OFFSET
     df["local_date"] = df["timestamp_local"].dt.date.astype(str)
 
